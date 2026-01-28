@@ -1,0 +1,42 @@
+[
+  {
+    "composition": 85,
+    "lighting": 75,
+    "color": 70,
+    "creativity": 80,
+    "technical": 90,
+    "emotion": 65
+  },
+  {
+    "composition": 70,
+    "lighting": 80,
+    "color": 85,
+    "creativity": 75,
+    "technical": 85,
+    "emotion": 70
+  },
+  {
+    "composition": 90,
+    "lighting": 70,
+    "color": 75,
+    "creativity": 85,
+    "technical": 80,
+    "emotion": 80
+  },
+  {
+    "composition": 65,
+    "lighting": 85,
+    "color": 90,
+    "creativity": 70,
+    "technical": 75,
+    "emotion": 75
+  },
+  {
+    "composition": 80,
+    "lighting": 90,
+    "color": 65,
+    "creativity": 90,
+    "technical": 85,
+    "emotion": 85
+  }
+]

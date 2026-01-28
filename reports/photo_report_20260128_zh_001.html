@@ -1,0 +1,520 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能摄影学习助手 - 专业照片分析报告</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 40px;
+        }
+        .photo-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .photo-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+        }
+        .photo-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        .photo-title {
+            font-size: 1.5em;
+            color: #333;
+            font-weight: 600;
+        }
+        .section {
+            margin: 25px 0;
+        }
+        .section-title {
+            font-size: 1.3em;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        .section-title::before {
+            content: "";
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        .info-value {
+            font-size: 1.1em;
+            color: #333;
+        }
+        .color-palette {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .color-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            margin-right: 12px;
+            border: 2px solid #e0e0e0;
+        }
+        .color-info {
+            font-size: 0.9em;
+        }
+        .score {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .emotion-text {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+            line-height: 1.8;
+            font-size: 1.05em;
+        }
+        .error {
+            background: #fee;
+            color: #c33;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #c33;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📷 智能摄影学习助手</h1>
+            <p>专业照片分析报告</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">生成时间: 2026-01-28 16:12:05</p>
+        </div>
+        <div class="content">
+
+        <div class="photo-card">
+            <div class="photo-header">
+                <div class="photo-number">1</div>
+                <div class="photo-title">WechatIMG1.jpg</div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">📸 基础信息</div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">分辨率</div>
+                        <div class="info-value">960x1440</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">长宽比</div>
+                        <div class="info-value">0.67 (竖拍)</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">平均亮度</div>
+                        <div class="info-value">61.82 (dark)</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">对比度</div>
+                        <div class="info-value">62.84 (high)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">📊 六维评分</div>
+                <div style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <canvas id="radarChart6280136871874589058" width="300" height="300"></canvas>
+                    </div>
+                    <div style="flex: 1; min-width: 300px;">
+
+                        <div style="margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span><strong>构图</strong></span>
+                                <span style="color: #4caf50; font-weight: bold;">80/100</span>
+                            </div>
+                            <div style="background: #e0e0e0; height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: #4caf50; height: 100%; width: 80%; transition: width 0.3s;"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span><strong>光影</strong></span>
+                                <span style="color: #ff9800; font-weight: bold;">70/100</span>
+                            </div>
+                            <div style="background: #e0e0e0; height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: #ff9800; height: 100%; width: 70%; transition: width 0.3s;"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span><strong>色彩</strong></span>
+                                <span style="color: #ff9800; font-weight: bold;">76.0/100</span>
+                            </div>
+                            <div style="background: #e0e0e0; height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: #ff9800; height: 100%; width: 76.0%; transition: width 0.3s;"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span><strong>创意</strong></span>
+                                <span style="color: #ff9800; font-weight: bold;">75/100</span>
+                            </div>
+                            <div style="background: #e0e0e0; height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: #ff9800; height: 100%; width: 75%; transition: width 0.3s;"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span><strong>技术</strong></span>
+                                <span style="color: #4caf50; font-weight: bold;">80/100</span>
+                            </div>
+                            <div style="background: #e0e0e0; height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: #4caf50; height: 100%; width: 80%; transition: width 0.3s;"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span><strong>情绪</strong></span>
+                                <span style="color: #4caf50; font-weight: bold;">85/100</span>
+                            </div>
+                            <div style="background: #e0e0e0; height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: #4caf50; height: 100%; width: 85%; transition: width 0.3s;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                (function() {
+                    const canvas = document.getElementById('radarChart6280136871874589058');
+                    const ctx = canvas.getContext('2d');
+                    const centerX = canvas.width / 2;
+                    const centerY = canvas.height / 2;
+                    const radius = 120;
+                    
+                    const dimensions = ['构图', '光影', '色彩', '创意', '技术', '情绪'];
+                    const scores = [80, 70, np.float64(76.0), 75, 80, 85];
+                    const angleStep = (Math.PI * 2) / dimensions.length;
+                    
+                    // Draw background grid
+                    ctx.strokeStyle = '#e0e0e0';
+                    ctx.lineWidth = 1;
+                    for (let i = 1; i <= 5; i++) {
+                        ctx.beginPath();
+                        const r = (radius / 5) * i;
+                        for (let j = 0; j <= dimensions.length; j++) {
+                            const angle = angleStep * j - Math.PI / 2;
+                            const x = centerX + r * Math.cos(angle);
+                            const y = centerY + r * Math.sin(angle);
+                            if (j === 0) ctx.moveTo(x, y);
+                            else ctx.lineTo(x, y);
+                        }
+                        ctx.closePath();
+                        ctx.stroke();
+                    }
+                    
+                    // Draw axis lines
+                    ctx.strokeStyle = '#ccc';
+                    ctx.lineWidth = 1;
+                    for (let i = 0; i < dimensions.length; i++) {
+                        const angle = angleStep * i - Math.PI / 2;
+                        ctx.beginPath();
+                        ctx.moveTo(centerX, centerY);
+                        ctx.lineTo(
+                            centerX + radius * Math.cos(angle),
+                            centerY + radius * Math.sin(angle)
+                        );
+                        ctx.stroke();
+                    }
+                    
+                    // Draw data area
+                    ctx.fillStyle = 'rgba(102, 126, 234, 0.2)';
+                    ctx.strokeStyle = 'rgba(102, 126, 234, 0.8)';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    for (let i = 0; i <= scores.length; i++) {
+                        const score = scores[i % scores.length];
+                        const angle = angleStep * i - Math.PI / 2;
+                        const r = (radius * score) / 100;
+                        const x = centerX + r * Math.cos(angle);
+                        const y = centerY + r * Math.sin(angle);
+                        if (i === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+                    
+                    // Draw data points
+                    ctx.fillStyle = '#667eea';
+                    for (let i = 0; i < scores.length; i++) {
+                        const score = scores[i];
+                        const angle = angleStep * i - Math.PI / 2;
+                        const r = (radius * score) / 100;
+                        const x = centerX + r * Math.cos(angle);
+                        const y = centerY + r * Math.sin(angle);
+                        ctx.beginPath();
+                        ctx.arc(x, y, 4, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    
+                    // Draw labels
+                    ctx.fillStyle = '#333';
+                    ctx.font = 'bold 12px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    for (let i = 0; i < dimensions.length; i++) {
+                        const angle = angleStep * i - Math.PI / 2;
+                        const labelRadius = radius + 25;
+                        const x = centerX + labelRadius * Math.cos(angle);
+                        const y = centerY + labelRadius * Math.sin(angle);
+                        ctx.fillText(dimensions[i], x, y);
+                    }
+                })();
+            </script>
+
+            <div class="section">
+                <div class="section-title">🎨 色彩美学分析</div>
+                <p style="margin-bottom: 10px;"><strong>主要色彩:</strong></p>
+                <div class="color-palette">
+
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: #001924;"></div>
+                        <div class="color-info">
+                            <div><strong>#001924</strong></div>
+                            <div style="color: #666;">black · 46.1%</div>
+                        </div>
+                    </div>
+
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: #04314d;"></div>
+                        <div class="color-info">
+                            <div><strong>#04314d</strong></div>
+                            <div style="color: #666;">black · 20.3%</div>
+                        </div>
+                    </div>
+
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: #0a5985;"></div>
+                        <div class="color-info">
+                            <div><strong>#0a5985</strong></div>
+                            <div style="color: #666;">black · 14.5%</div>
+                        </div>
+                    </div>
+
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: #4498bf;"></div>
+                        <div class="color-info">
+                            <div><strong>#4498bf</strong></div>
+                            <div style="color: #666;">gray · 9.7%</div>
+                        </div>
+                    </div>
+
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: #a5d1e5;"></div>
+                        <div class="color-info">
+                            <div><strong>#a5d1e5</strong></div>
+                            <div style="color: #666;">white · 9.5%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <p><strong>色彩和谐度:</strong> <span class="score">85/100</span></p>
+                    <p style="margin-top: 10px;"><strong>类型:</strong> complementary</p>
+                    <p style="margin-top: 10px;"><strong>描述:</strong> 互补色系：对比强烈，视觉冲击力强</p>
+                    <p style="margin-top: 10px;"><strong>美学综合评分:</strong> <span class="score">76.0/100</span></p>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: white; border-radius: 8px;">
+                    <p><strong>色彩心理学:</strong></p>
+                    <p style="margin-top: 8px;">• 情感倾向: 神秘, 力量, 优雅</p>
+                    <p style="margin-top: 5px;">• 中性色调：传递平和、专业、沉稳</p>
+                    <p style="margin-top: 5px;">• 高饱和度：色彩鲜艳，视觉冲击力强</p>
+                    <p style="margin-top: 8px;">• 心理学评分: <strong>60.0/100</strong></p>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">❤️ 情感分析</div>
+
+                <div class="emotion-text">
+                    我感受到一股深沉的专注与情感的流淌。这位歌手低垂的眼眸、微抿的唇角，还有那微微扬起的手势，都让我仿佛听见了空气中凝固的旋律。这种沉浸感特别动人，像是他正把灵魂注入某个音符里。<br><br>最触动我的是光影的魔法。幽蓝的灯光像液态月光般流淌在他身上，那些闪烁的亮片仿佛把星光穿在了身上。这种虚实相生的质感，既凸显了舞台的梦幻感，又让他的孤独身影显得格外真实可触。<br><br>这让我想起深夜空荡荡的剧院里，最后一束追光下的独唱。仿佛整个世界都褪去了颜色，只剩下歌声在黑暗中生长。技术上的留白处理得很妙，暗背景像块吸走杂念的黑曜石，让情感浓度无限放大。<br><br>情感传达相当成功，那种"万人中央独自中央"的孤独艺术感扑面而来。如果非要建议，或许可以尝试在烟雾效果上增加些层次感，让光束穿透时形成更立体的情绪漩涡。但现在的克制反而成就了诗意。<br><br>继续这样用镜头捕捉灵魂震颤的瞬间吧，你的作品让我想起了塔可夫斯基说的："艺术家不是展示答案，而是教会人们如何感受。"
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">💡 学习建议</div>
+
+                <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #ff9800;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h4 style="margin: 0; color: #333;">💡 光影控制</h4>
+                        <span style="background: #ff9800; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85em;">需要提升</span>
+                    </div>
+                    
+                    <p><strong>当前问题：</strong>光影处理需要加强</p>
+                    <p><strong>改进建议：</strong></p>
+                    <ul>
+
+                <li>学习识别不同的光线类型（自然光、人工光、散射光等）</li>
+                <li>掌握黄金时段拍摄（日出后、日落前的柔和光线）</li>
+                <li>练习使用反光板或补光设备改善光影效果</li>
+                <li>理解光线的方向性对主体的影响</li>
+            
+                    </ul>
+                    <p><strong>参考资源：</strong>photo-tutor/references/lighting-theory.md</p>
+                
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">📅 个性化练习方案</div>
+                <p style="margin-bottom: 20px; color: #666;">根据你的当前水平，我们为你制定了以下练习计划：</p>
+
+                <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+                    <h4 style="color: #1976d2; margin-bottom: 12px;">📌 短期练习（1-2周）</h4>
+                    <div style="background: white; padding: 15px; border-radius: 6px; margin-bottom: 10px;">
+                        <p><strong>任务1：构图练习</strong></p>
+                        <p style="margin-top: 8px;">• 每天拍摄10张照片，刻意运用三分法构图<br>• 选择不同的主体（人物、建筑、风景等）<br>• 完成标准：能够快速识别并运用三分法</p>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 6px;">
+                        <p><strong>任务2：光线观察</strong></p>
+                        <p style="margin-top: 8px;">• 同一场景在不同时间拍摄（早、中、晚）<br>• 记录光线变化对画面的影响<br>• 完成标准：能够预判光线效果</p>
+                    </div>
+                </div>
+
+                <div style="background: #fff3e0; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+                    <h4 style="color: #f57c00; margin-bottom: 12px;">🎯 中期练习（1个月）</h4>
+                    <div style="background: white; padding: 15px; border-radius: 6px; margin-bottom: 10px;">
+                        <p><strong>任务3：主题创作</strong></p>
+                        <p style="margin-top: 8px;">• 选择一个主题（如"城市夜景"、"人物情感"）<br>• 围绕主题拍摄30-50张作品<br>• 完成标准：形成自己的拍摄思路和风格</p>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 6px;">
+                        <p><strong>任务4：后期学习</strong></p>
+                        <p style="margin-top: 8px;">• 学习基础的后期调色技巧<br>• 每周精修2-3张照片<br>• 完成标准：掌握曝光、色彩、锐度等基础调整</p>
+                    </div>
+                </div>
+
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+                    <h4 style="color: #388e3c; margin-bottom: 12px;">🚀 长期目标（3个月）</h4>
+                    <div style="background: white; padding: 15px; border-radius: 6px; margin-bottom: 10px;">
+                        <p><strong>任务5：风格探索</strong></p>
+                        <p style="margin-top: 8px;">• 尝试不同的摄影风格（纪实、艺术、商业等）<br>• 模仿3-5位喜欢的摄影师作品<br>• 完成标准：找到自己的风格方向</p>
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 6px;">
+                        <p><strong>任务6：作品集整理</strong></p>
+                        <p style="margin-top: 8px;">• 从过去作品中精选20-30张<br>• 整理成完整的作品集<br>• 完成标准：能够清晰表达自己的摄影理念</p>
+                    </div>
+                </div>
+
+                <div style="background: #f5f5f5; padding: 20px; border-radius: 8px;">
+                    <h4 style="color: #333; margin-bottom: 12px;">💪 练习建议</h4>
+                    <p><strong>频率建议：</strong></p>
+                    <p style="margin-top: 8px;">• 每天至少拍摄10-15分钟<br>• 每周整理和回顾作品1-2次<br>• 每月与他人交流学习心得1次</p>
+                    
+                    <p style="margin-top: 15px;"><strong>反馈方式：</strong></p>
+                    <p style="margin-top: 8px;">• 定期上传作品到本系统进行分析<br>• 加入摄影社群，获得更多反馈<br>• 记录学习笔记，总结进步和不足</p>
+                    
+                    <p style="margin-top: 15px; color: #667eea; font-weight: 600;">💡 记住：持续练习和反思是提升的关键！</p>
+                </div>
+            </div>
+        </div>
+
+        </div>
+        <div class="footer">
+            <p><strong>智能摄影学习助手</strong></p>
+            <p>基于 PIL、NumPy、scikit-image 和 InternLM AI</p>
+            <p style="margin-top: 10px;">💡 更多摄影知识请参考 photo-tutor/references/ 目录</p>
+        </div>
+    </div>
+</body>
+</html>

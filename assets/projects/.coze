@@ -1,0 +1,6 @@
+[skill]
+  skill_package = "photo-tutor.skill"
+  name = "photo-tutor"
+  description = "智能摄影学习助手，通过照片分析提供构图美学诊断、颜色美学分析、情感解读、严格评分及个性化练习方案。集成RAG知识库，包含Intrinsic Image Decomposition理论、光影理论、演唱会摄影完全指南等专业文档。新增MCDM多准则决策分析，使用pyMCDM库实现六维评分客观权重计算。修复文件编码问题，支持多种编码自动识别。实现智能体自动检测与安装机制，完全被动用户体验，首次使用自动安装依赖并实时通知进度。"
+  project_name = "摄影诊断技能"
+  project_description = "智能摄影学习助手"
