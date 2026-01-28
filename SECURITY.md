@@ -6,7 +6,7 @@
 
 **`.env`** - 包含真实的API Key（已被Git忽略）
 ```bash
-INTERNLM_API_KEY=sk-zuCTZPfbymFxHCOvsFbd3uT5G8y6OIbZXZ9lxBQ7zo1ZTnpV
+INTERNLM_API_KEY=your_actual_api_key_here
 ```
 
 **`.env.example`** - 配置模板（会上传到Git）
