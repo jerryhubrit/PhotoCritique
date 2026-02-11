@@ -96,8 +96,8 @@ class ColorAestheticsAnalyzer:
                 if img.mode != 'RGB':
                     img = img.convert('RGB')
                 
-                # 缩小图片以加速分析
-                img_small = img.resize((100, 100), Image.Resampling.LANCZOS)
+                # 缩小图片以加速分析（256x256 保留更多色彩细节）
+                img_small = img.resize((256, 256), Image.Resampling.LANCZOS)
                 
                 # 提取像素
                 pixels = np.array(img_small).reshape(-1, 3)
